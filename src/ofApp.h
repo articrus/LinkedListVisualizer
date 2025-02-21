@@ -32,12 +32,13 @@ class ofApp : public ofBaseApp{
 		//The Node struct for the LinkedList
 		struct Node {
 			int radius; //The radius of the circle
+			float yPos; //The y position (used in animation)
 			Node* next; //The next node in the list
 		};
 
 		//The LinkedList class
 		class LinkedList {
-			Node* head; 
+			public: Node* head; 
 
 		//Methods
 		public:
@@ -114,7 +115,7 @@ class ofApp : public ofBaseApp{
 				delete tempNode->next;
 				tempNode->next = NULL;
 			}
-
+			/*
 			//Get the node at the given index
 			int getRadiusAtPos(int pos) {
 				if (pos < 0) {
@@ -140,7 +141,7 @@ class ofApp : public ofBaseApp{
 				//If index is out of bounds
 				return -1;
 			}
-
+			*/
 			//Return the number of nodes in the linked list
 			int listCount() {
 				//If no head, return 0
@@ -161,4 +162,6 @@ class ofApp : public ofBaseApp{
 		
 		LinkedList linkedlist;
 		float cameraPosition;
+		float oscillationSpeed; //The speed of the oscillation
+		float oscillationAmp; //The oscillation amplitude
 };

@@ -8,6 +8,8 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 	cameraPosition = 0.0f;
+	oscillationSpeed = 1.0f;
+	oscillationAmp = 100.0f;
 	//Generate a list of 5 random radii
 	for (int i = 0; i < 5; i++)
 	{
@@ -17,7 +19,13 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
+	Node* tempNode = linkedlist.head;
+	float time = ofGetElapsedTimef();
 
+	while (tempNode != nullptr) {
+		tempNode->yPos = ofGetHeight()/2 + sin(oscillationSpeed * time) * oscillationAmp;
+		tempNode = tempNode->next;
+	}
 }
 
 //--------------------------------------------------------------
@@ -28,11 +36,15 @@ void ofApp::draw(){
 	ofDrawBitmapString(linkedlist.listCount(), 100, 100);
 	ofDrawBitmapString(cameraPosition, 150, 100);
 	//Draw the list as circles (adjust later)
-	for (int i = 0; i < linkedlist.listCount(); i++) {
+	Node* tempNode = linkedlist.head;
+	int j = 0;
+	while (tempNode != nullptr) {
 		ofSetColor(0, 255, 0);
-		ofDrawCircle(ofGetWidth() * (i + 1) / 6, ofGetHeight() / 2, linkedlist.getRadiusAtPos(i));
+		ofDrawCircle(ofGetWidth() * (j + 1) / 6, tempNode->yPos, tempNode->radius);
 		ofSetColor(255, 255, 255);
-		ofDrawBitmapString(linkedlist.getRadiusAtPos(i), ofGetWidth() * (i + 1) / 6, ofGetHeight() / 2);
+		ofDrawBitmapString(tempNode->radius, ofGetWidth() * (j + 1) / 6, ofGetHeight() / 2);
+		j++;
+		tempNode = tempNode->next;
 	}
 }
 
@@ -47,8 +59,8 @@ void ofApp::keyPressed(int key){
 		case 's': linkedlist.removeAtTail(); break; //Delete at tail
 		case 'e': break; //Sort list in ascending order
 		//Animation keys
-		case 'z': break; //Increase oscillation
-		case 'x': break; //Decrease oscillation
+		case 'z': oscillationSpeed += 0.1f; break; //Increase oscillation
+		case 'x': oscillationSpeed -= 0.1f; break; //Decrease oscillation
 		//Camera keys
 		case OF_KEY_LEFT: cameraPosition += 10.0f; break; //Pan left
 		case OF_KEY_RIGHT: cameraPosition -= 10.0f; break; //Pan right
