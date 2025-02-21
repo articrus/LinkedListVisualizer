@@ -26,9 +26,12 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 
+		//To generate random radii
+		int generateRandNum(int min, int max);
+
 		//The Node struct for the LinkedList
 		struct Node {
-			float radius; //The radius of the circle
+			int radius; //The radius of the circle
 			Node* next; //The next node in the list
 		};
 
@@ -43,12 +46,12 @@ class ofApp : public ofBaseApp{
 			LinkedList() : head(NULL) {}
 
 			//Constructor with a value (radius)
-			LinkedList(float radius) {
+			LinkedList(int radius) {
 				insertAtHead(radius);
 			}
 
 			//Insert Node at the head of the list
-			void insertAtHead(float newRadius) {
+			void insertAtHead(int newRadius) {
 				Node* newNode = new Node();
 				newNode->radius = newRadius;
 				newNode->next = head;
@@ -56,7 +59,7 @@ class ofApp : public ofBaseApp{
 			}
 
 			//Insert node at the tail of the list
-			void insertAtTail(float newRadius){
+			void insertAtTail(int newRadius){
 				Node* newNode = new Node();
 				newNode->radius = newRadius;
 				newNode->next = NULL;
@@ -113,7 +116,7 @@ class ofApp : public ofBaseApp{
 			}
 
 			//Get the node at the given index
-			float getRadiusAtPos(int pos) {
+			int getRadiusAtPos(int pos) {
 				if (pos < 0) {
 					return -1; //If index is less than 0
 				}
@@ -157,4 +160,5 @@ class ofApp : public ofBaseApp{
 		};
 		
 		LinkedList linkedlist;
+		float cameraPosition;
 };
