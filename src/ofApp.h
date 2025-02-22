@@ -110,7 +110,10 @@ class ofApp : public ofBaseApp{
 				tempNode->next = NULL;
 			}
 		};
-		
+
+		//To sort the values
+		void bubbleSort();
+
 		LinkedList linkedList; //The linked list we are going to use
 		float cameraPosition; //The camera's position (used in paning)
 		float oscillationSpeed; //The speed of the oscillation

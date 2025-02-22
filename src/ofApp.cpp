@@ -70,7 +70,7 @@ void ofApp::keyPressed(int key){
 		case 'w': linkedList.insertAtTail(generateRandNum(25, 75)); break; //Insert at tail
 		case 'a': linkedList.removeAtHead(); break; //Delete head node
 		case 's': linkedList.removeAtTail(); break; //Delete at tail
-		case 'e': break; //Sort list in ascending order
+		case 'e': bubbleSort(); //Sort list in ascending order
 		//Animation keys
 		case 'z': oscillationSpeed += 0.1f; break; //Increase oscillation
 		case 'x': oscillationSpeed -= 0.1f; break; //Decrease oscillation
@@ -86,6 +86,29 @@ int ofApp::generateRandNum(int min, int max) {
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> range(min, max); //Setting the bounds
 	return range(gen);
+}
+
+//-Sorts the linked list using the bubble sort algorithm
+void ofApp::bubbleSort()
+{
+	bool swapped;
+	do {
+		swapped = false;
+		Node* tempNode = linkedList.head;
+
+		while (tempNode != nullptr && tempNode->next != nullptr) {
+			//If current radius is greater than the next
+			if (tempNode->radius > tempNode->next->radius) {
+				//Swap data
+				int temp = tempNode->radius;
+				tempNode->radius = tempNode->next->radius;
+				tempNode->next->radius = temp;
+
+				swapped = true; //Continue looping
+			}
+			tempNode = tempNode->next;
+		}
+	} while (swapped);
 }
 
 //--------------------------------------------------------------
