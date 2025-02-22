@@ -40,20 +40,19 @@ class ofApp : public ofBaseApp{
 		class LinkedList {
 			public: Node* head; 
 
-		//Methods
+		//Methods (Some methods referenced with W3 schools)
 		public:
 
 			//Default constructor (makes head null)
-			LinkedList() : head(NULL) {}
+			LinkedList() { head = NULL; }
 
 			//Constructor with a value (radius)
-			LinkedList(int radius) {
-				insertAtHead(radius);
-			}
+			LinkedList(int radius) { insertAtHead(radius); }
 
 			//Insert Node at the head of the list
 			void insertAtHead(int newRadius) {
 				Node* newNode = new Node();
+				//The radius of the circle
 				newNode->radius = newRadius;
 				newNode->next = head;
 				head = newNode;
@@ -62,20 +61,20 @@ class ofApp : public ofBaseApp{
 			//Insert node at the tail of the list
 			void insertAtTail(int newRadius){
 				Node* newNode = new Node();
+				//The radius of the circle
 				newNode->radius = newRadius;
 				newNode->next = NULL;
 
 				//If head is null, make this node the head
-				if (!head) {
+				if (!head) 
+				{
 					head = newNode;
 					return;
 				}
 
 				//Travel through list to find the last node
 				Node* tempNode = head;
-				while (tempNode->next) {
-					tempNode = tempNode->next;
-				}
+				while (tempNode->next) { tempNode = tempNode->next; }
 
 				//Make last node the new node
 				tempNode->next = newNode;
@@ -83,10 +82,8 @@ class ofApp : public ofBaseApp{
 
 			//Remove node at the head of the list
 			void removeAtHead() {
-				if (!head) {
-					return; //List empty
-				}
-
+				if (!head) { return; } //List empty
+				//Make tempNode the head, make the next the head, and delete tempnode
 				Node* tempNode = head;
 				head = head->next;
 				delete tempNode;
@@ -94,12 +91,11 @@ class ofApp : public ofBaseApp{
 
 			//Remove node at the tail of the list
 			void removeAtTail() {
-				if (!head) {
-					return; //List empty
-				}
+				if (!head) { return; } //List empty
 
 				//If there is only one node
-				if (!head->next) {
+				if (!head->next) 
+				{
 					delete head;
 					head = NULL;
 					return;
@@ -107,61 +103,16 @@ class ofApp : public ofBaseApp{
 
 				//Travel through list to second to last node
 				Node* tempNode = head;
-				while (tempNode->next->next) {
-					tempNode = tempNode->next;
-				}
+				while (tempNode->next->next) { tempNode = tempNode->next; }
 
 				//Remove node at the tail
 				delete tempNode->next;
 				tempNode->next = NULL;
 			}
-			/*
-			//Get the node at the given index
-			int getRadiusAtPos(int pos) {
-				if (pos < 0) {
-					return -1; //If index is less than 0
-				}
-
-				//If index is 0, return the head
-				if (pos == 0) {
-					return head->radius;
-				}
-
-				//Navigate through the list to find the node at the index
-				int currentIndex = 1;
-				Node* tempNode = head->next;
-				while (tempNode != nullptr) {
-					if (currentIndex == pos) {
-						return tempNode->radius;
-					}
-					tempNode = tempNode->next;
-					currentIndex++;
-				}
-
-				//If index is out of bounds
-				return -1;
-			}
-			*/
-			//Return the number of nodes in the linked list
-			int listCount() {
-				//If no head, return 0
-				if (!head) {
-					return 0;
-				}
-
-				//Navigate through list and incremement the nodecount 
-				int nodeCount = 0;
-				Node* tempNode = head;
-				while (tempNode != nullptr) {
-					nodeCount++;
-					tempNode = tempNode->next;
-				}
-				return nodeCount;
-			}
 		};
 		
-		LinkedList linkedlist;
-		float cameraPosition;
+		LinkedList linkedList; //The linked list we are going to use
+		float cameraPosition; //The camera's position (used in paning)
 		float oscillationSpeed; //The speed of the oscillation
 		float oscillationAmp; //The oscillation amplitude
 };
