@@ -66,8 +66,8 @@ void ofApp::keyPressed(int key){
 	key = std::tolower(key); //Make key lowercase (inputs are case-sensitive)
 	switch (key) {
 		//List keys
-		case 'q': linkedList.insertAtHead(generateRandNum(25, 100)); break; //Insert at head
-		case 'w': linkedList.insertAtTail(generateRandNum(25, 100)); break; //Insert at tail
+		case 'q': linkedList.insertAtHead(generateRandNum(25, 75)); break; //Insert at head
+		case 'w': linkedList.insertAtTail(generateRandNum(25, 75)); break; //Insert at tail
 		case 'a': linkedList.removeAtHead(); break; //Delete head node
 		case 's': linkedList.removeAtTail(); break; //Delete at tail
 		case 'e': break; //Sort list in ascending order
